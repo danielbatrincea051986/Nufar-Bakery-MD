@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nufar Bakery - Meniu Complet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #fcfaf7;
+            --bg-card: #ffffff;
+            --text-main: #2a2a2a;
+            --text-muted: #888;
+            --accent: #b08d57; 
+            --summer-accent: #2e8b57; /* Verde pentru sectiunea de vara */
+            --border: #eceae6;
+            --shadow-card: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        header {
+            background: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo-container { display: inline-block; margin-bottom: 20px; }
+
+        .logo-img {
+            width: 150px; height: 150px; border-radius: 50%;
+            object-fit: cover; border: 4px solid var(--accent);
+            background-color: #eee; display: flex; align-items: center; justify-content: center;
+        }
+
+        .brand-title {
+            font-family: 'Playfair Display', serif; font-size: 2.2rem;
+            text-transform: uppercase; letter-spacing: 1.5px;
+        }
+
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+
+        .category-title {
+            font-family: 'Playfair Display', serif; font-size: 1.8rem;
+            margin: 50px 0 25px; color: var(--accent); text-align: center;
+        }
+
+        .category-title.summer { color: var(--summer-accent); }
+
+        .menu-item {
+            background: var(--bg-card); border-radius: 28px;
+            margin-bottom: 25px; overflow: hidden; border: 1px solid var(--border);
+            box-shadow: var(--shadow-card);
+        }
+
+        .item-photo-wrapper {
+            width: 100%; height: 220px; background-color: #f0f0f0;
+            display: flex; align-items: center; justify-content: center; position: relative;
+        }
+
+        .item-photo { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+
+        .photo-placeholder-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #aaa; z-index: 1; }
+
+        .item-info { padding: 20px; }
+
+        .item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+
+        .item-name { font-weight: 600; font-size: 1.2rem; }
+        
+        .item-price {
+            background: #fdf8f0; color: var(--accent);
+            padding: 6px 14px; border-radius: 12px; font-weight: 700;
+        }
+
+        .summer .item-price { background: #f0fdf4; color: var(--summer-accent); }
+
+        .add-btn {
+            width: 100%; background: var(--accent); color: white; border: none;
+            padding: 14px; border-radius: 15px; font-weight: 600; cursor: pointer;
+        }
+
+        .summer-btn { background: var(--summer-accent); }
+
+        .toppings-box { background: white; border-radius: 24px; border: 1px solid var(--border); overflow: hidden; }
+        .topping-item { display: flex; justify-content: space-between; padding: 15px 25px; border-bottom: 1px solid #f6f4f0; }
+        .topping-price { color: var(--accent); font-weight: 700; }
+
+        footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); margin-top: 50px; background: white; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-container">
+        <img src="logo.jpg" alt="Nufar Bakery" class="logo-photo" onerror="this.src='https://via.placeholder.com/150?text=NUFAR'">
+    </div>
+    <div class="brand-title">Nufar Bakery</div>
+    <p style="letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem;">Artisan Bread & Fine Coffee</p>
+</header>
+
+<div class="container">
+
+    <!-- CAFEA ȘI BĂUTURI CALDE -->
+    <h2 class="category-title">Cafea & Băuturi Calde</h2>
+    
+    <!-- Produs: Espresso -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="espresso.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Espresso</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Espresso / Double</span>
+                <span class="item-price">22 / 32 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+    <!-- Produs: Americano -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="americano.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Americano</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Americano / Double</span>
+                <span class="item-price">22 / 32 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+    <!-- Produs: Latte -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="latte.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Latte</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Latte / Double</span>
+                <span class="item-price">31 / 41 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+    <!-- Produs: Cappuccino -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="cappuccino.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Cappuccino</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Cappuccino / Double</span>
+                <span class="item-price">27 / 37 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+    <!-- Produs: Macchiato -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="macchiato.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Macchiato</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Macchiato / Double</span>
+                <span class="item-price">27 / 37 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+    <!-- Produs: Mocha -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="mocha.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Mocha</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Mocha / Double</span>
+                <span class="item-price">31 / 41 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+    <!-- Produs: Flat White -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="flat white.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Flat White</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Flat White / Double</span>
+                <span class="item-price">27 / 37 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+    <!-- Produs: Raf -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="raf.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Raf</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Raf / Double</span>
+                <span class="item-price">31 / 41 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+    <!-- Produs: Cacao -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="cacao.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Cacao</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Cacao / Double</span>
+                <span class="item-price">20 / 30 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+    <!-- Produs: Decafeinata -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="decafeinata.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Decafeinată</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Decafeinată / Double</span>
+                <span class="item-price">25 / 35 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+    <!-- Produs: Ciocolata Fierbinte -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="ciocolata fierbinte.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Ciocolată Fierbinte</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Ciocolată Fierbinte / Double</span>
+                <span class="item-price">29 / 39 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+    <!-- Produs: Ceai -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="ceai.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Ceai Select</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Ceai (Infuzie/Plic)</span>
+                <span class="item-price">15 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+    <!-- BĂUTURI DE VARĂ -->
+    <div class="summer">
+        <h2 class="category-title summer">☀️ Băuturi de VARĂ</h2>
+        
+        <!-- Produs: Mojito -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="mojito.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Mojito</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Mojito</span>
+                <span class="item-price">45 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+        <!-- Produs: Limonadă Clasică -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="limonada clasica.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Limonadă Clasică</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Limonadă Clasică</span>
+                <span class="item-price">45 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+        <!-- Produs: Limonadă Căpșuni -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="limonada capsuni.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Limonadă Cîpșuni</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Limonadă Căpșuni</span>
+                <span class="item-price">45 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+        <!-- Produs: Limonadă Mango -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="limonada mango.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Limonadă Mango</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Limonadă Mango</span>
+                <span class="item-price">45 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+        <!-- Produs: Pina Colada -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="pina colada.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Pina Colada</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Pina Colada</span>
+                <span class="item-price">45 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+        <!-- Produs: Ice Latte -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="ice latte.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Ice Latte</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Ice Latte</span>
+                <span class="item-price">45 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+        <!-- Produs: Iced Americano -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="iced americano.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Iced Americano</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Iced Americano</span>
+                <span class="item-price">45 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+        <!-- Produs: Espresso Tonic -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="espresso tonic.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Espresso Tonic</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Espresso Tonic</span>
+                <span class="item-price">45 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+        <!-- Produs: Iced Chocolate -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="iced chocolate.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Iced Chocolate</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Iced Chocolate</span>
+                <span class="item-price">45 MDL</span>
+            </div>
+            <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+    <!-- TOPPINGS -->
+    <h2 class="category-title">Adaosuri</h2>
+    <div class="toppings-box">
+        <div class="topping-item"><span>Lapte / Sirop / Condensat</span> <span class="topping-price">4 MDL</span></div>
+        <div class="topping-item"><span>Lapte Vegan (Ovăz/Cocos)</span> <span class="topping-price">8 MDL</span></div>
+        <div class="topping-item"><span>Miere / Topping Extra</span> <span class="topping-price">5 MDL</span></div>
+    </div>
+
+</div>
+
+<footer>
+    <p style="font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--text-main); margin-bottom: 10px;">Nufar Bakery</p>
+    <p>&copy; 2026 NUFAR BAKERY. Totul pentru tine.</p>
+    <p style="font-size: 0.8rem; margin-top: 5px;">Bulevardul Cuza Vodă 30 / Bulevardul Dacia 1. Chișinău, Moldova</p>
+</footer>
+
+</body>
+</html>
