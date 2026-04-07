@@ -8,14 +8,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-main: #fcfaf7;
+            /* Culoarea Old Rose pentru fundal */
+            --bg-main: #C08081; 
             --bg-card: #ffffff;
             --text-main: #2a2a2a;
-            --text-muted: #888;
+            --text-muted: #f0f0f0;
             --accent: #b08d57; 
-            --summer-accent: #2e8b57; /* Verde pentru sectiunea de vara */
-            --border: #eceae6;
-            --shadow-card: 0 10px 30px rgba(0,0,0,0.05);
+            --summer-accent: #2e8b57;
+            --bakery-accent: #8e5a3e; /* Culoare caldă pentru Bakery */
+            --border: rgba(255, 255, 255, 0.2);
+            --shadow-card: 0 10px 30px rgba(0,0,0,0.15);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -29,37 +31,56 @@
         }
 
         header {
-            background: cream;
             padding: 40px 20px;
             text-align: center;
-            border-bottom: 1px solid var(--border);
         }
 
-        .logo-container { display: inline-block; margin-bottom: 20px; }
+        /* Logo adaptat la mărimea cardurilor de produs */
+        .logo-container { 
+            width: 100%;
+            max-width: 560px; /* Aliniat cu lățimea containerului de item-uri */
+            margin: 0 auto 20px;
+            background: var(--bg-card);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border);
+        }
 
-        .logo-img {
-            width: 150px; height: 150px; border-radius: 50%;
-            object-fit: cover; border: 4px solid var(--accent);
-            background-color: #eee; display: flex; align-items: center; justify-content: center;
+        .logo-photo {
+            width: 100%;
+            height: 220px; /* Aceeași înălțime ca item-photo-wrapper */
+            object-fit: cover;
+            display: block;
         }
 
         .brand-title {
-            font-family: 'Playfair Display', serif; font-size: 2.2rem;
-            text-transform: uppercase; letter-spacing: 1.5px;
+            font-family: 'Playfair Display', serif; 
+            font-size: 2.2rem;
+            text-transform: uppercase; 
+            letter-spacing: 1.5px;
+            color: white;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
         }
 
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
 
         .category-title {
-            font-family: 'Playfair Display', serif; font-size: 1.8rem;
-            margin: 50px 0 25px; color: var(--accent); text-align: center;
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.8rem;
+            margin: 50px 0 25px; 
+            color: white; 
+            text-align: center;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
         }
 
-        .category-title.summer { color: var(--summer-accent); }
+        .category-title.bakery { color: #ffe4d1; border-color: var(--bakery-accent); }
+        .category-title.summer { color: #d1ffd6; border-color: var(--summer-accent); }
 
         .menu-item {
             background: var(--bg-card); border-radius: 28px;
-            margin-bottom: 25px; overflow: hidden; border: 1px solid var(--border);
+            margin-bottom: 25px; overflow: hidden;
             box-shadow: var(--shadow-card);
         }
 
@@ -69,13 +90,10 @@
         }
 
         .item-photo { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
-
         .photo-placeholder-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #aaa; z-index: 1; }
 
         .item-info { padding: 20px; }
-
         .item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-
         .item-name { font-weight: 600; font-size: 1.2rem; }
         
         .item-price {
@@ -83,27 +101,29 @@
             padding: 6px 14px; border-radius: 12px; font-weight: 700;
         }
 
-        .summer .item-price { background: #f0fdf4; color: var(--summer-accent); }
-
         .add-btn {
             width: 100%; background: var(--accent); color: white; border: none;
             padding: 14px; border-radius: 15px; font-weight: 600; cursor: pointer;
+            transition: transform 0.2s;
         }
-
+        
+        .add-btn:active { transform: scale(0.98); }
+        .bakery-btn { background: var(--bakery-accent); }
         .summer-btn { background: var(--summer-accent); }
 
-        .toppings-box { background: white; border-radius: 24px; border: 1px solid var(--border); overflow: hidden; }
+        .toppings-box { background: white; border-radius: 24px; overflow: hidden; margin-bottom: 30px; }
         .topping-item { display: flex; justify-content: space-between; padding: 15px 25px; border-bottom: 1px solid #f6f4f0; }
         .topping-price { color: var(--accent); font-weight: 700; }
 
-        footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); margin-top: 50px; background: white; }
+        footer { text-align: center; padding: 40px; margin-top: 50px; background: rgba(0,0,0,0.05); color: white; }
     </style>
 </head>
 <body>
 
 <header>
     <div class="logo-container">
-        <img src="logo.jpg" alt="Nufar Bakery" class="logo-photo" onerror="this.src='https://via.placeholder.com/150?text=NUFAR'">
+        <!-- Logo-ul are acum dimensiunea unui card de produs -->
+        <img src="logo.jpg" alt="Nufar Bakery" class="logo-photo" onerror="this.src='https://via.placeholder.com/600x220?text=NUFAR+BAKERY'">
     </div>
     <div class="brand-title">Nufar Bakery</div>
     <p style="letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem;">Artisan Bread & Fine Coffee</p>
@@ -112,7 +132,7 @@
 <div class="container">
 
     <!-- CAFEA ȘI BĂUTURI CALDE -->
-    <h2 class="category-title">Cafea & Băuturi Calde</h2>
+    <h2 class="category-title">☕Cafea & Băuturi Calde</h2>
     
     <!-- Produs: Espresso -->
     <div class="menu-item">
@@ -430,6 +450,24 @@
                 <span class="item-price">45 MDL</span>
             </div>
             <button class="add-btn">Adaugă în coș</button>
+        </div>
+    </div>
+
+        <!-- SECTIUNE NOUA: BAKERY -->
+    <h2 class="category-title bakery">🥐 Produse de Panificație & Patiserie</h2>
+    
+    <!-- Exemplu Produs Bakery -->
+    <div class="menu-item">
+        <div class="item-photo-wrapper">
+            <img src="croissant.jpg" class="item-photo" onerror="this.style.opacity='0';">
+            <div class="photo-placeholder-text">Croissant cu Unt</div>
+        </div>
+        <div class="item-info">
+            <div class="item-header">
+                <span class="item-name">Croissant Clasic</span>
+                <span class="item-price">25 MDL</span>
+            </div>
+            <button class="add-btn bakery-btn">Adaugă în coș</button>
         </div>
     </div>
 
