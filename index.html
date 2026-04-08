@@ -3,582 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nufar Bakery - Meniu Adaptiv</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Nufar Bakery - Meniu Complet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* DEFINIREA PALETEI DE CULORI PENTRU CONTRAST MAXIM */
         :root {
-            --bg-site: #F4EFEA;      /* Un bej foarte deschis, cald pentru fundal general */
-            --bg-card: #FFFFFF;      /* Alb pur pentru fundalul cardurilor */
-            --text-dark: #3E2723;    /* Maro închis (cafea) pentru text principal (vizibilitate excelentă) */
-            --text-muted: #6D4C41;   /* Maro mediu pentru texte secundare */
-            --accent-gold: #BC9A6C;  /* Auriu prăjit pentru prețuri și elemente importante */
-            --bakery-accent: #8e5a3e;/* Maro brut pentru butoane Bakery */
-            --shadow-subtile: 0 4px 15px rgba(62, 39, 35, 0.05); /* Umbră fină maronie */
+            --primary: #4A3728; 
+            --accent: #BC9A6C;  
+            --bg-site: #F9F7F5; 
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
 
-        /* RESETARE ȘI SETĂRI DE BAZĂ */
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-site);
-            color: var(--text-dark);
+            color: var(--primary);
             line-height: 1.6;
             padding: 0 20px;
         }
 
-        /* CONTAINERUL CENTRAL - IMPRIMA DESIGNUL "NORMAL" PE DESKTOP */
-        .main-container {
-            max-width: 1100px; /* Limitează lățimea pe desktop */
+        .wrapper {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 0;
+            padding-bottom: 60px;
         }
 
-        /* HEADER OPTIMIZAT ȘI FIXAT */
         header {
+            padding: 60px 0 40px;
             text-align: center;
-            margin-bottom: 50px;
         }
 
-        /* FIX PENTRU LOGO: Forma este dată de partea încercuită a imaginii tale */
-        .logo-wrapper {
-            width: 160px; /* Mărime medie, normală */
+        /* LOGO ROTUND - decupează partea centrală */
+        .logo-circle {
+            width: 160px;
             height: 160px;
-            margin: 0 auto 15px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            padding: 5px;
+            background: var(--white);
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden; /* Taie tot ce este în afara formei date de border */
-            
-            /* Aici e fix-ul: în loc să facem containerul rotund, 
-               aplicăm border-radius chiar pe marginea imaginii centrale */
-            border-radius: 50%; 
-            border: 4px solid var(--accent-gold); /* Bordură aurie fină */
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            background-color: white; /* Fundal alb sub imagine */
+            box-shadow: var(--shadow);
         }
 
-        .logo-photo {
-            /* Forțăm imaginea originală să se micșoreze până 
-               când partea sa circulară centrală umple containerul wrapper */
-            width: 120%; /* Puțin mai mare pentru a asigura decuparea perfectă */
-            height: 120%;
-            object-fit: cover; /* Asigură că centrul imaginii este vizibil */
-            transform: scale(1.1); /* Ajustare fină pentru a tăia marginile drepte ale pozei originale */
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
-        .brand-title {
+        .brand-name {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--text-dark);
-            letter-spacing: 1px;
+            font-size: 3rem;
+            letter-spacing: -1px;
             margin-bottom: 5px;
         }
 
-        .brand-subtitle {
-            color: var(--text-muted);
-            font-size: 0.85rem;
+        .brand-tagline {
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            font-weight: 500;
+            letter-spacing: 4px;
+            color: var(--accent);
+            font-weight: 600;
         }
 
-        /* SECTIUNE DE CATEGORIE */
-        .category-section { margin-bottom: 60px; }
-
-        .category-header {
+        .category-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--text-dark);
-            margin-bottom: 30px;
+            font-size: 2rem;
+            margin: 60px 0 30px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
 
-        /* Linie subtilă înainte și după titlu */
-        .category-header::after {
-            content: ""; flex: 1; height: 1px; background: rgba(62, 39, 35, 0.1);
+        .category-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, rgba(74, 55, 40, 0.2), transparent);
         }
 
-        /* GRID-UL ADAPTIV - SOLUȚIA PENTRU IMAGINILE ÎNTINSE PE LAPTOP */
+        /* GRID PENTRU LAPTOP - REPARĂ IMAGINILE ÎNTINSE */
         .menu-grid {
             display: grid;
-            grid-template-columns: 1fr; /* Mobil: o singură coloană */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
         }
 
-        /* Media Query pentru Laptop/Desktop (mai mare de 768px) */
-        @media (min-width: 768px) {
-            .menu-grid {
-                /* Pe laptop, punem 2 carduri pe rând. 
-                   Acest lucru forțează cardurile să nu mai ocupe toată lățimea. */
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .menu-grid {
-                /* Pe ecrane și mai mari, punem 3 carduri pe rând pentru un aspect compact. */
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* CARDUL DE PRODUS - RECOMPACTAT */
         .menu-item {
-            background-color: var(--bg-card);
-            border-radius: 20px;
+            background: var(--white);
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: var(--shadow-subtile);
+            box-shadow: var(--shadow);
             display: flex;
-            flex-direction: column; /* Organizează elementele vertical */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex-direction: column;
+            transition: transform 0.3s ease;
         }
 
-        .menu-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(62, 39, 35, 0.1);
-        }
+        .menu-item:hover { transform: translateY(-5px); }
 
-        /* FIX PENTRU IMAGINI ÎNTINSE: Înălțime fixă proporțională */
         .item-photo-wrapper {
             width: 100%;
-            height: 200px; /* Înălțime compactă, controlată */
-            background-color: #FDFBFA; /* Bej foarte deschis sub imagine */
+            height: 220px;
+            background: #f0f0f0;
         }
 
         .item-photo {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Esențial: imaginea se redimensionează proporțional, nu se întinde */
+            object-fit: cover;
         }
 
-        /* INFO PRODUS - CONTRAST MARE */
         .item-info {
             padding: 20px;
-            flex-grow: 1; /* Împinge butonul în jos */
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
         .item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
             margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
         }
 
         .item-name {
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: var(--text-dark); /* Contrast maxim */
-            max-width: 70%;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 5px;
         }
 
         .item-price {
-            background-color: #FEF8ED; /* Un fundal auriu extrem de deschis */
-            color: var(--accent-gold); /* Auriu închis */
-            padding: 5px 12px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            white-space: nowrap; /* Prețul rămâne pe un singur rând */
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1.1rem;
         }
 
-        /* BUTON ADAPTAT */
         .add-btn {
             width: 100%;
-            background-color: var(--accent-gold);
-            color: white;
+            background: var(--primary);
+            color: var(--white);
             border: none;
-            padding: 13px;
-            border-radius: 12px;
+            padding: 12px;
+            border-radius: 8px;
             font-weight: 600;
-            font-size: 0.9rem;
+            text-transform: uppercase;
+            font-size: 0.8rem;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: 0.3s;
         }
 
-        .add-btn:hover {
-            background-color: #A88656; /* Auriu puțin mai închis la hover */
+        .add-btn:hover { background: var(--accent); }
+        .bakery-btn { background: #8e5a3e; }
+
+        .toppings-box {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
         }
 
-        .bakery-btn { background-color: var(--bakery-accent); }
-        .bakery-btn:hover { background-color: #724932; }
+        .topping-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+        }
 
+        .topping-price { font-weight: 600; color: var(--accent); }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
     </style>
 </head>
 <body>
 
-<div class="main-container">
-
+<div class="wrapper">
     <header>
-        <div class="logo-wrapper">
-            <img src="logo.jpg" alt="Logo central Nufar Bakery" class="logo-photo" onerror="this.src='https://via.placeholder.com/150/FFFFFF/BC9A6C?text=NUFAR'">
+        <div class="logo-circle">
+            <img src="logo.jpg" alt="Nufar Bakery" onerror="this.src='https://via.placeholder.com/150'">
         </div>
-        <h1 class="brand-title">Nufar Bakery</h1>
-        <p class="brand-subtitle">Fine Coffee & Artisan Bread</p>
+        <h1 class="brand-name">Nufar Bakery</h1>
+        <p class="brand-tagline">Fine Coffee & Artisan Bread</p>
     </header>
-    
-<div class="container">
- 
-    <!-- CAFEA ȘI BĂUTURI CALDE -->
-    <h2 class="category-title">☕Cafea & Băuturi Calde</h2>
-    
-    <!-- Produs: Espresso -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="espresso.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Espresso / Double</span>
-                <span class="item-price">22 / 32 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
-    </div>
 
-    <!-- Produs: Americano -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="americano.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Americano / Double</span>
-                <span class="item-price">22 / 32 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
-    </div>
-
-    <!-- Produs: Latte -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="latte.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Latte / Double</span>
-                <span class="item-price">31 / 41 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
-    </div>
-
-    <!-- Produs: Cappuccino -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="cappuccino.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Cappuccino / Double</span>
-                <span class="item-price">27 / 37 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
-    </div>
-
-    <!-- Produs: Macchiato -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="macchiato.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Macchiato / Double</span>
-                <span class="item-price">27 / 37 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
-    </div>
-
-    <!-- Produs: Mocha -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="mocha.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Mocha / Double</span>
-                <span class="item-price">31 / 41 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
-    </div>
-
-    <!-- Produs: Flat White -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="flat white.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Flat White / Double</span>
-                <span class="item-price">27 / 37 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
-    </div>
-
-    <!-- Produs: Raf -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="raf.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Raf / Double</span>
-                <span class="item-price">31 / 41 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
-    </div>
-
-    <!-- Produs: Cacao -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="cacao.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Cacao / Double</span>
-                <span class="item-price">20 / 30 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
-    </div>
-
-    <!-- Produs: Decafeinata -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="decafeinata.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Decafeinată / Double</span>
-                <span class="item-price">25 / 35 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
-    </div>
-
-    <!-- Produs: Ciocolata Fierbinte -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="ciocolata fierbinte.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Ciocolată Fierbinte / Double</span>
-                <span class="item-price">29 / 39 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
-    </div>
-
-    <!-- Produs: Ceai -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="ceai.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Ceai (Infuzie/Plic)</span>
-                <span class="item-price">15 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
+    <!-- CAFEA & BĂUTURI CALDE -->
+    <h2 class="category-title">☕ Cafea & Băuturi Calde</h2>
+    <div class="menu-grid">
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="espresso.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Espresso / Double</span><span class="item-price">22 / 32 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="americano.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Americano / Double</span><span class="item-price">22 / 32 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="latte.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Latte / Double</span><span class="item-price">31 / 41 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="cappuccino.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Cappuccino / Double</span><span class="item-price">27 / 37 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="macchiato.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Macchiato / Double</span><span class="item-price">27 / 37 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="mocha.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Mocha / Double</span><span class="item-price">31 / 41 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="flat white.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Flat White / Double</span><span class="item-price">27 / 37 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="raf.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Raf / Double</span><span class="item-price">31 / 41 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="cacao.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Cacao / Double</span><span class="item-price">20 / 30 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="decafeinata.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Decafeinată / Double</span><span class="item-price">25 / 35 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="ciocolata fierbinte.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Ciocolată Fierbinte / Double</span><span class="item-price">29 / 39 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="ceai.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Ceai (Infuzie/Plic)</span><span class="item-price">15 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
     </div>
 
     <!-- BĂUTURI DE VARĂ -->
-    <div class="summer">
-        <h2 class="category-title summer">☀️ Băuturi de VARĂ</h2>
-        
-        <!-- Produs: Mojito -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="mojito.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Mojito</span>
-                <span class="item-price">45 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
+    <h2 class="category-title">☀️ Băuturi de VARĂ</h2>
+    <div class="menu-grid">
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="mojito.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Mojito</span><span class="item-price">45 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="limonada clasica.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Limonadă Clasică</span><span class="item-price">45 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+       <div class="menu-item"><div class="item-photo-wrapper"><img src="limonada capsuni.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Limonadă Căpșuni</span><span class="item-price">45 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="limonada mango.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Limonadă Mango</span><span class="item-price">45 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="pina colada.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Pina Colada</span><span class="item-price">45 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="ice latte.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Ice Latte</span><span class="item-price">45 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="iced americano.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Iced Americano</span><span class="item-price">45 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="espresso tonic.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Espresso Tonic</span><span class="item-price">45 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="iced chocolate.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Iced Chocolate</span><span class="item-price">45 MDL</span></div><button class="add-btn">Adaugă în coș</button></div></div>
     </div>
 
-        <!-- Produs: Limonadă Clasică -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="limonada clasica.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Limonadă Clasică</span>
-                <span class="item-price">45 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
+    <!-- BAKERY -->
+    <h2 class="category-title">🥐 Panificație & Patiserie</h2>
+    <div class="menu-grid">
+        <div class="menu-item"><div class="item-photo-wrapper"><img src="logo.jpg" class="item-photo"></div><div class="item-info"><div class="item-header"><span class="item-name">Croissant Clasic</span><span class="item-price">20 MDL</span></div><button class="add-btn bakery-btn">Adaugă în coș</button></div></div>
     </div>
 
-        <!-- Produs: Limonadă Căpșuni -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="limonada capsuni.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Limonadă Căpșuni</span>
-                <span class="item-price">45 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
-    </div>
-
-        <!-- Produs: Limonadă Mango -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="limonada mango.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Limonadă Mango</span>
-                <span class="item-price">45 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
-    </div>
-
-        <!-- Produs: Pina Colada -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="pina colada.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Pina Colada</span>
-                <span class="item-price">45 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
-    </div>
-
-        <!-- Produs: Ice Latte -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="ice latte.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Ice Latte</span>
-                <span class="item-price">45 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
-    </div>
-
-        <!-- Produs: Iced Americano -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="iced americano.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Iced Americano</span>
-                <span class="item-price">45 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
-    </div>
-
-        <!-- Produs: Espresso Tonic -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="espresso tonic.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Espresso Tonic</span>
-                <span class="item-price">45 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
-    </div>
-
-        <!-- Produs: Iced Chocolate -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="iced chocolate.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Iced Chocolate</span>
-                <span class="item-price">45 MDL</span>
-            </div>
-            <button class="add-btn">Adaugă în coș</button>
-        </div>
-    </div>
-
-        <!-- SECTIUNE NOUA: BAKERY -->
-    <h2 class="category-title bakery">🥐 Produse de Panificație & Patiserie</h2>
-    
-    <!-- Exemplu Produs Bakery -->
-    <div class="menu-item">
-        <div class="item-photo-wrapper">
-            <img src="logo.jpg" class="item-photo" onerror="this.style.opacity='0';">
-            <div class="photo-placeholder-text"></div>
-        </div>
-        <div class="item-info">
-            <div class="item-header">
-                <span class="item-name">Croissant Clasic</span>
-                <span class="item-price">20 MDL</span>
-            </div>
-            <button class="add-btn bakery-btn">Adaugă în coș</button>
-        </div>
-    </div>
-
-        
-    <!-- TOPPINGS -->
+    <!-- ADAOSURI -->
     <h2 class="category-title">Adaosuri</h2>
     <div class="toppings-box">
         <div class="topping-item"><span>Lapte / Sirop / Condensat</span> <span class="topping-price">5 MDL</span></div>
         <div class="topping-item"><span>Lapte Vegan (Ovăz/Cocos)</span> <span class="topping-price">8 MDL</span></div>
         <div class="topping-item"><span>Miere / Topping Extra</span> <span class="topping-price">5 MDL</span></div>
     </div>
-
 </div>
 
 <footer>
-    <p style="font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--text-main); margin-bottom: 10px;">Nufar Bakery</p>
+    <p style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 10px;">Nufar Bakery</p>
     <p>&copy; 2026 NUFAR BAKERY. Totul pentru tine.</p>
-    <p style="font-size: 0.8rem; margin-top: 5px;">Bulevardul Cuza Vodă 30 / Bulevardul Dacia 1. Chișinău, Moldova</p>
+    <p style="font-size: 0.85rem; margin-top: 10px; opacity: 0.8;">Bulevardul Cuza Vodă 30 / Bulevardul Dacia 1. Chișinău, Moldova</p>
 </footer>
 
 </body>
