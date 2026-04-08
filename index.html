@@ -3,150 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nufar Bakery - Meniu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <meta name="google-site-verification" content="AwvlP206Um-KLO_bVvhmmZVxu9lwkhXMsgass-3wQeU" />
+    <title>Nufar Bakery - Meniu Complet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-body: #D2B48C; /* Un bej-cafeniu mai cald pentru vizibilitate */
+            /* Culoarea Old Rose pentru fundal */
+            --bg-main: #DDE5D8; 
             --bg-card: #ffffff;
-            --text-dark: #3e2723;
-            --accent: #8e5a3e;
-            --shadow: 0 4px 20px rgba(0,0,0,0.15);
+            --text-main: #2a2a2a;
+            --text-muted: #f0f0f0;
+            --accent: #b08d57; 
+            --summer-accent: #2e8b57;
+            --bakery-accent: #8e5a3e; /* Culoare caldă pentru Bakery */
+            --border: rgba(255, 255, 255, 0.2);
+            --shadow-card: 0 10px 30px rgba(0,0,0,0.15);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-dark);
-            padding: 20px;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
         }
 
-        /* HEADER FIXAT PENTRU LAPTOP */
         header {
+            padding: 40px 20px;
             text-align: center;
-            max-width: 1100px;
-            margin: 0 auto 40px;
         }
 
+        /* Logo adaptat la mărimea cardurilor de produs */
         .logo-container { 
-            width: 180px; /* Dimensiune normală de logo */
-            height: 180px;
-            margin: 0 auto 15px;
-            background: white;
-            border-radius: 50%; /* Logo rotund - arată mult mai profesional */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow);
-            border: 5px solid white;
+            width: 100%;
+            max-width: 560px; /* Aliniat cu lățimea containerului de item-uri */
+            margin: 0 auto 20px;
+            background: var(--bg-card);
+            border-radius: 28px;
             overflow: hidden;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border);
         }
 
         .logo-photo {
-            width: 85%;
-            height: auto;
-            object-fit: contain;
+            width: 100%;
+            height: 220px; /* Aceeași înălțime ca item-photo-wrapper */
+            object-fit: cover;
+            display: block;
         }
 
         .brand-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: #3e2723;
-            margin-bottom: 5px;
+            font-family: 'Playfair Display', serif; 
+            font-size: 2.2rem;
+            text-transform: uppercase; 
+            letter-spacing: 1.5px;
+            color: white;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
         }
 
-        /* GRID-UL CARE REPARĂ DISPUNEREA PE LAPTOP */
-        .container {
-            max-width: 1100px; /* Limitează lățimea pe laptop ca să nu fie totul uriaș */
-            margin: 0 auto;
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+
+        .category-title {
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.8rem;
+            margin: 50px 0 25px; 
+            color: white; 
+            text-align: center;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
         }
 
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr; /* Mobil: 1 coloană */
-            gap: 25px;
-        }
-
-        /* PE LAPTOP: Pune 2 sau 3 produse pe rând */
-        @media (min-width: 768px) {
-            .menu-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (min-width: 1024px) {
-            .menu-grid { grid-template-columns: repeat(3, 1fr); }
-        }
+        .category-title.bakery { color: #ffe4d1; border-color: var(--bakery-accent); }
+        .category-title.summer { color: #d1ffd6; border-color: var(--summer-accent); }
 
         .menu-item {
-            background: var(--bg-card);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-            transition: 0.3s;
+            background: var(--bg-card); border-radius: 28px;
+            margin-bottom: 25px; overflow: hidden;
+            box-shadow: var(--shadow-card);
         }
 
         .item-photo-wrapper {
-            width: 100%;
-            height: 200px; /* Înălțime fixă pentru a nu ocupa tot ecranul */
+            width: 100%; height: 220px; background-color: #f0f0f0;
+            display: flex; align-items: center; justify-content: center; position: relative;
         }
 
-        .item-photo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .item-photo { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+        .photo-placeholder-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #aaa; z-index: 1; }
 
-        .item-info {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .item-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            display: block;
-            margin-bottom: 10px;
-            color: #3e2723;
-        }
-
+        .item-info { padding: 20px; }
+        .item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .item-name { font-weight: 600; font-size: 1.2rem; }
+        
         .item-price {
-            font-weight: 700;
-            color: var(--accent);
-            display: block;
-            margin-bottom: 15px;
+            background: #fdf8f0; color: var(--accent);
+            padding: 6px 14px; border-radius: 12px; font-weight: 700;
         }
 
         .add-btn {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
+            width: 100%; background: var(--accent); color: white; border: none;
+            padding: 14px; border-radius: 15px; font-weight: 600; cursor: pointer;
+            transition: transform 0.2s;
         }
+        
+        .add-btn:active { transform: scale(0.98); }
+        .bakery-btn { background: var(--bakery-accent); }
+        .summer-btn { background: var(--summer-accent); }
 
-        .category-header {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin: 40px 0 20px;
-            color: #3e2723;
-            text-align: left;
-            border-bottom: 2px solid rgba(0,0,0,0.1);
-        }
+        .toppings-box { background: white; border-radius: 24px; overflow: hidden; margin-bottom: 30px; }
+        .topping-item { display: flex; justify-content: space-between; padding: 15px 25px; border-bottom: 1px solid #f6f4f0; }
+        .topping-price { color: var(--accent); font-weight: 700; }
+
+        footer { text-align: center; padding: 40px; margin-top: 50px; background: rgba(0,0,0,0.05); color: white; }
     </style>
 </head>
 <body>
 
 <header>
     <div class="logo-container">
-        <img src="logo.jpg" alt="Logo" class="logo-photo" onerror="this.src='https://via.placeholder.com/150'">
+        <!-- Logo-ul are acum dimensiunea unui card de produs -->
+        <img src="logo.jpg" alt="Nufar Bakery" class="logo-photo" onerror="this.src='https://via.placeholder.com/600x220?text=NUFAR+BAKERY'">
     </div>
-    <h1 class="brand-title">Nufar Bakery</h1>
-    <p style="color: #5d4037; font-weight: 500;">☕ Cafea & Patiserie Artizanală</p>
+    <div class="brand-title">Nufar Bakery</div>
+    <p style="letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem;">Artisan Bread & Fine Coffee</p>
 </header>
     
 <div class="container">
