@@ -28,17 +28,9 @@
             padding: 0 20px;
         }
 
-        /* CONTAINERUL CENTRAL - IMPRIMA DESIGNUL "NORMAL" PE DESKTOP */
-        .main-container {
-            max-width: 1100px; /* Limitează lățimea pe desktop */
-            margin: 0 auto;
-            padding: 40px 0;
-        }
-
-        /* HEADER OPTIMIZAT ȘI FIXAT */
         header {
+            padding: 40px 20px;
             text-align: center;
-            margin-bottom: 50px;
         }
 
         /* FIX PENTRU LOGO: Forma este dată de partea încercuită a imaginii tale */
@@ -84,143 +76,70 @@
             font-weight: 500;
         }
 
-        /* SECTIUNE DE CATEGORIE */
-        .category-section { margin-bottom: 60px; }
 
-        .category-header {
-            font-family: 'Playfair Display', serif;
+        .category-title {
+            font-family: 'Playfair Display', serif; 
             font-size: 1.8rem;
-            color: var(--text-dark);
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            margin: 50px 0 25px; 
+            color: white; 
+            text-align: center;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
         }
 
-        /* Linie subtilă înainte și după titlu */
-        .category-header::after {
-            content: ""; flex: 1; height: 1px; background: rgba(62, 39, 35, 0.1);
-        }
+        .category-title.bakery { color: #ffe4d1; border-color: var(--bakery-accent); }
+        .category-title.summer { color: #d1ffd6; border-color: var(--summer-accent); }
 
-        /* GRID-UL ADAPTIV - SOLUȚIA PENTRU IMAGINILE ÎNTINSE PE LAPTOP */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr; /* Mobil: o singură coloană */
-            gap: 25px;
-        }
-
-        /* Media Query pentru Laptop/Desktop (mai mare de 500px) */
-        @media (min-width: 500px) {
-            .menu-grid {
-                /* Pe laptop, punem 2 carduri pe rând. 
-                   Acest lucru forțează cardurile să nu mai ocupe toată lățimea. */
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .menu-grid {
-                /* Pe ecrane și mai mari, punem 3 carduri pe rând pentru un aspect compact. */
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* CARDUL DE PRODUS - RECOMPACTAT */
         .menu-item {
-            background-color: var(--bg-card);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow-subtile);
-            display: flex;
-            flex-direction: column; /* Organizează elementele vertical */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: var(--bg-card); border-radius: 28px;
+            margin-bottom: 25px; overflow: hidden;
+            box-shadow: var(--shadow-card);
         }
 
-        .menu-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(62, 39, 35, 0.1);
-        }
-
-        /* FIX PENTRU IMAGINI ÎNTINSE: Înălțime fixă proporțională */
         .item-photo-wrapper {
-            width: 100%;
-            height: 200px; /* Înălțime compactă, controlată */
-            background-color: #FDFBFA; /* Bej foarte deschis sub imagine */
+            width: 100%; height: 220px; background-color: #f0f0f0;
+            display: flex; align-items: center; justify-content: center; position: relative;
         }
 
-        .item-photo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Esențial: imaginea se redimensionează proporțional, nu se întinde */
-        }
+        .item-photo { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+        .photo-placeholder-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #aaa; z-index: 1; }
 
-        /* INFO PRODUS - CONTRAST MARE */
-        .item-info {
-            padding: 20px;
-            flex-grow: 1; /* Împinge butonul în jos */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-
-        .item-name {
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: var(--text-dark); /* Contrast maxim */
-            max-width: 70%;
-        }
-
+        .item-info { padding: 20px; }
+        .item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .item-name { font-weight: 600; font-size: 1.2rem; }
+        
         .item-price {
-            background-color: #FEF8ED; /* Un fundal auriu extrem de deschis */
-            color: var(--accent-gold); /* Auriu închis */
-            padding: 5px 12px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            white-space: nowrap; /* Prețul rămâne pe un singur rând */
+            background: #fdf8f0; color: var(--accent);
+            padding: 6px 14px; border-radius: 12px; font-weight: 700;
         }
 
-        /* BUTON ADAPTAT */
         .add-btn {
-            width: 100%;
-            background-color: var(--accent-gold);
-            color: white;
-            border: none;
-            padding: 13px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
+            width: 100%; background: var(--accent); color: white; border: none;
+            padding: 14px; border-radius: 15px; font-weight: 600; cursor: pointer;
+            transition: transform 0.2s;
         }
+        
+        .add-btn:active { transform: scale(0.98); }
+        .bakery-btn { background: var(--bakery-accent); }
+        .summer-btn { background: var(--summer-accent); }
 
-        .add-btn:hover {
-            background-color: #A88656; /* Auriu puțin mai închis la hover */
-        }
+        .toppings-box { background: white; border-radius: 24px; overflow: hidden; margin-bottom: 30px; }
+        .topping-item { display: flex; justify-content: space-between; padding: 15px 25px; border-bottom: 1px solid #f6f4f0; }
+        .topping-price { color: var(--accent); font-weight: 700; }
 
-        .bakery-btn { background-color: var(--bakery-accent); }
-        .bakery-btn:hover { background-color: #724932; }
-
+        footer { text-align: center; padding: 40px; margin-top: 50px; background: rgba(0,0,0,0.05); color: white; }
     </style>
 </head>
 <body>
 
-<div class="main-container">
-
-    <header>
-        <div class="logo-wrapper">
-            <img src="logo.jpg" alt="Logo central Nufar Bakery" class="logo-photo" onerror="this.src='https://via.placeholder.com/150/FFFFFF/BC9A6C?text=NUFAR'">
-        </div>
-        <h1 class="brand-title">Nufar Bakery</h1>
-        <p class="brand-subtitle">Fine Coffee & Artisan Bread</p>
-    </header>
+<header>
+    <div class="logo-container">
+        <!-- Logo-ul are acum dimensiunea unui card de produs -->
+        <img src="logo.jpg" alt="Nufar Bakery" class="logo-photo" onerror="this.src='https://via.placeholder.com/600x220?text=NUFAR+BAKERY'">
+    </div>
+    <div class="brand-title">Nufar Bakery</div>
+    <p style="letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem;">Artisan Bread & Fine Coffee</p>
+</header>
     
 <div class="container">
 
