@@ -23,6 +23,7 @@
             color: var(--primary);
             line-height: 1.6;
             padding: 0 20px;
+            position: relative;
         }
 
         .wrapper {
@@ -32,11 +33,44 @@
         }
 
         header {
-            padding: 60px 0 40px;
+            padding: 80px 0 40px;
             text-align: center;
         }
 
-        /* LOGO ROTUND - decupează partea centrală */
+        /* COMUTATORUL DE LIMBI (BUTOANELE DIN COLȚ) */
+        .lang-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .lang-btn {
+            background: var(--white);
+            border: 1px solid var(--accent);
+            color: var(--primary);
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .lang-btn:hover {
+            background: var(--bg-site);
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        /* LOGO ROTUND */
         .logo-circle {
             width: 160px;
             height: 160px;
@@ -90,7 +124,6 @@
             background: linear-gradient(to right, rgba(74, 55, 40, 0.2), transparent);
         }
 
-        /* GRID PENTRU LAPTOP - REPARĂ IMAGINILE ÎNTINSE */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -109,22 +142,24 @@
 
         .menu-item:hover { transform: translateY(-5px); }
 
+        /* EFECTUL DE ZOOM PENTRU IMAGINI */
         .item-photo-wrapper {
             width: 100%;
             height: 220px;
             background: #f0f0f0;
-            overflow: hidden;
+            overflow: hidden; /* Ascunde marginile imaginii când aceasta se mărește */
         }
 
         .item-photo {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            transition: transform 0.4s ease; /* Oferă fluiditate efectului de zoom */
         }
 
+        /* Când punem mouse-ul pe produs, imaginea se mărește fin cu 8% */
         .menu-item:hover .item-photo {
-            transform: scale(1.08);
+            transform: scale(1.08); 
         }
 
         .item-info {
@@ -193,21 +228,32 @@
             margin-top: 40px;
             border-top: 1px solid rgba(0,0,0,0.05);
         }
+
+        /* Adaptare pentru ecranele mobile */
+        @media (max-width: 600px) {
+            header { padding-top: 90px; }
+            .lang-switcher { top: 15px; right: 15px; }
+        }
     </style>
 </head>
 <body>
 
 <div class="wrapper">
+    <div class="lang-switcher">
+        <button onclick="changeLanguage('ro')" id="btn-ro" class="lang-btn active">RO</button>
+        <button onclick="changeLanguage('ru')" id="btn-ru" class="lang-btn">RU</button>
+        <button onclick="changeLanguage('en')" id="btn-en" class="lang-btn">EN</button>
+    </div>
+
     <header>
         <div class="logo-circle">
             <img src="logo.jpg" alt="Nufar Bakery" onerror="this.src='https://via.placeholder.com/150'">
         </div>
         <h1 class="brand-name">Nufar Bakery</h1>
-        <p class="brand-tagline">Fine Coffee & Artisan Bread</p>
+        <p class="brand-tagline" data-i18n="brand-tagline">Fine Coffee & Artisan Bread</p>
     </header>
 
-    <!-- CAFEA & BĂUTURI CALDE -->
-    <h2 class="category-title">☕ Cafea & Băuturi Calde</h2>
+    <h2 class="category-title" data-i18n="cat-coffee">☕ Cafea & Băuturi Calde</h2>
     <div class="menu-grid">
         
         <div class="menu-item">
@@ -216,10 +262,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Espresso / Double</span>
+                    <span class="item-name" data-i18n="item-espresso">Espresso / Double</span>
                     <span class="item-price">18 / 28 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
         
@@ -229,10 +275,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Americano / Double</span>
+                    <span class="item-name" data-i18n="item-americano">Americano / Double</span>
                     <span class="item-price">18 / 28 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
         
@@ -242,10 +288,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Latte / Vegan</span>
+                    <span class="item-name" data-i18n="item-latte">Latte / Vegan</span>
                     <span class="item-price">29 MDL / 35 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
         
@@ -255,10 +301,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Cappuccino / Double / Vegan</span>
+                    <span class="item-name" data-i18n="item-cappuccino">Cappuccino / Double / Vegan</span>
                     <span class="item-price">25 / 35 MDL / 30 / 40 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
         
@@ -268,10 +314,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Mocaccino</span>
+                    <span class="item-name" data-i18n="item-mocaccino">Mocaccino</span>
                     <span class="item-price">31 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
         
@@ -281,10 +327,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Mocha / Double</span>
+                    <span class="item-name" data-i18n="item-mocha">Mocha / Double</span>
                     <span class="item-price">31 / 41 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
         
@@ -294,10 +340,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Flat White / Double</span>
+                    <span class="item-name" data-i18n="item-flat-white">Flat White / Double</span>
                     <span class="item-price">27 / 37 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
         
@@ -307,10 +353,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Raf / Double</span>
+                    <span class="item-name" data-i18n="item-raf">Raf / Double</span>
                     <span class="item-price">31 / 41 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
         
@@ -320,10 +366,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Cacao</span>
+                    <span class="item-name" data-i18n="item-cacao">Cacao</span>
                     <span class="item-price">20 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
         
@@ -333,10 +379,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Decafeinată / Double</span>
+                    <span class="item-name" data-i18n="item-decaf">Decafeinată / Double</span>
                     <span class="item-price">25 / 35 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
         
@@ -346,10 +392,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Ciocolată Fierbinte</span>
+                    <span class="item-name" data-i18n="item-hot-chocolate">Ciocolată Fierbinte</span>
                     <span class="item-price">29 MDL</span>
                 </div>
-               <button class="add-btn">Adaugă în coș</button>
+               <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
         
@@ -359,16 +405,15 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Ceai (Infuzie/Plic)</span>
+                    <span class="item-name" data-i18n="item-tea">Ceai (Infuzie/Plic)</span>
                     <span class="item-price">15 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
     </div>
 
-    <!-- BĂUTURI DE VARĂ -->
-    <h2 class="category-title">☀️ Băuturi de VARĂ</h2>
+    <h2 class="category-title" data-i18n="cat-summer">☀️ Băuturi de VARĂ</h2>
     <div class="menu-grid">
         
         <div class="menu-item">
@@ -377,10 +422,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Mojito</span>
+                    <span class="item-name" data-i18n="item-mojito">Mojito</span>
                     <span class="item-price">45 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
         
@@ -390,10 +435,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Limonadă Clasică</span>
+                    <span class="item-name" data-i18n="item-lim-classic">Limonadă Clasică</span>
                     <span class="item-price">45 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
         
@@ -403,10 +448,10 @@
            </div>
            <div class="item-info">
                <div class="item-header">
-                   <span class="item-name">Limonadă Căpșuni</span>
+                   <span class="item-name" data-i18n="item-lim-strawberry">Limonadă Căpșuni</span>
                    <span class="item-price">45 MDL</span>
                </div>
-               <button class="add-btn">Adaugă în coș</button>
+               <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
            </div>
        </div>
         
@@ -416,10 +461,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Limonadă Mango</span>
+                    <span class="item-name" data-i18n="item-lim-mango">Limonadă Mango</span>
                     <span class="item-price">45 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
         
@@ -429,10 +474,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Pina Colada</span>
+                    <span class="item-name" data-i18n="item-pina-colada">Pina Colada</span>
                     <span class="item-price">45 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
         
@@ -442,10 +487,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Ice Latte / Vegan</span>
+                    <span class="item-name" data-i18n="item-ice-latte">Ice Latte / Vegan</span>
                     <span class="item-price">45 MDL / 55 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
         
@@ -455,10 +500,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Iced Americano</span>
+                    <span class="item-name" data-i18n="item-iced-americano">Iced Americano</span>
                     <span class="item-price">45 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
         
@@ -468,10 +513,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Espresso Tonic</span>
+                    <span class="item-name" data-i18n="item-esp-tonic">Espresso Tonic</span>
                     <span class="item-price">45 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
         
@@ -481,16 +526,15 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Iced Chocolate</span>
+                    <span class="item-name" data-i18n="item-iced-chocolate">Iced Chocolate</span>
                     <span class="item-price">45 MDL</span>
                 </div>
-                <button class="add-btn">Adaugă în coș</button>
+                <button class="add-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
     </div>
 
-    <!-- BAKERY -->
-    <h2 class="category-title">🥐 Panificație & Patiserie</h2>
+    <h2 class="category-title" data-i18n="cat-bakery">🥐 Panificație & Patiserie</h2>
     <div class="menu-grid">
         
        <div class="menu-item">
@@ -499,10 +543,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Saralie cu brînză de vaci</span>
+                    <span class="item-name" data-i18n="item-sar-cheese">Saralie cu brînză de vaci</span>
                     <span class="item-price">23 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -512,10 +556,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Saralie cu cartofi</span>
+                    <span class="item-name" data-i18n="item-sar-potato">Saralie cu cartofi</span>
                     <span class="item-price">15 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -525,10 +569,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Saralie cu varză</span>
+                    <span class="item-name" data-i18n="item-sar-cabbage">Saralie cu varză</span>
                     <span class="item-price">15 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -538,10 +582,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Saralie cu prune și nuci</span>
+                    <span class="item-name" data-i18n="item-sar-plum">Saralie cu prune și nuci</span>
                     <span class="item-price">23 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -551,10 +595,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Învîrtită cu brînză și verdeață</span>
+                    <span class="item-name" data-i18n="item-inv-cheese">Învîrtită cu brînză și verdeață</span>
                     <span class="item-price">23 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -564,10 +608,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Învîrtită cu cartofi și ciuperci</span>
+                    <span class="item-name" data-i18n="item-inv-mushrooms">Învîrtită cu cartofi și ciuperci</span>
                     <span class="item-price">20 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -577,10 +621,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Învîrtită cu măr</span>
+                    <span class="item-name" data-i18n="item-inv-apple">Învîrtită cu măr</span>
                     <span class="item-price">15 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -590,10 +634,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Învîrtită cu dovleac</span>
+                    <span class="item-name" data-i18n="item-inv-pumpkin">Învîrtită cu dovleac</span>
                     <span class="item-price">15 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -603,10 +647,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Învîrtită cu vișină</span>
+                    <span class="item-name" data-i18n="item-inv-cherry">Învîrtită cu vișină</span>
                     <span class="item-price">25 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -616,10 +660,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Plăcintă cu brînză (plic)</span>
+                    <span class="item-name" data-i18n="item-plac-cheese">Plăcintă cu brînză (plic)</span>
                     <span class="item-price">23 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -629,10 +673,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Plăcintă cu carne de găină</span>
+                    <span class="item-name" data-i18n="item-plac-chicken">Plăcintă cu carne de găină</span>
                     <span class="item-price">27 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -642,10 +686,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Crenvușcă în aluat</span>
+                    <span class="item-name" data-i18n="item-sausage-roll">Crenvușcă în aluat</span>
                     <span class="item-price">25 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -655,10 +699,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Mini Rollini cu pui</span>
+                    <span class="item-name" data-i18n="item-rollini-chicken">Mini Rollini cu pui</span>
                     <span class="item-price">9 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -668,10 +712,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Mini Rollini cu vișină</span>
+                    <span class="item-name" data-i18n="item-rollini-cherry">Mini Rollini cu vișină</span>
                     <span class="item-price">9 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -681,10 +725,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Mini foietaj cu brînză de vaci dulce</span>
+                    <span class="item-name" data-i18n="item-puff-cheese">Mini foietaj cu brînză de vaci dulce</span>
                     <span class="item-price">9 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -694,10 +738,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Mini foietaj cu carne de găină</span>
+                    <span class="item-name" data-i18n="item-puff-chicken">Mini foietaj cu carne de găină</span>
                     <span class="item-price">10 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -707,10 +751,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Mini foietaj cu fructe de pădure</span>
+                    <span class="item-name" data-i18n="item-puff-berries">Mini foietaj cu fructe de pădure</span>
                     <span class="item-price">10 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -720,10 +764,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Mini foietaj cu mac</span>
+                    <span class="item-name" data-i18n="item-puff-poppy">Mini foietaj cu mac</span>
                     <span class="item-price">10 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -733,10 +777,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Mini foietaj cu vișină</span>
+                    <span class="item-name" data-i18n="item-puff-cherry">Mini foietaj cu vișină</span>
                     <span class="item-price">10 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -746,10 +790,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Croissant cu ciocolată</span>
+                    <span class="item-name" data-i18n="item-croissant">Croissant cu ciocolată</span>
                     <span class="item-price">20 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -759,10 +803,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Covrig cu umplutură și migdale</span>
+                    <span class="item-name" data-i18n="item-pretzel">Covrig cu umplutură și migdale</span>
                     <span class="item-price">20 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -772,10 +816,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Pâine Ciabata</span>
+                    <span class="item-name" data-i18n="item-ciabatta">Pâine Ciabata</span>
                     <span class="item-price">10 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -785,10 +829,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Baghetă franceză cu semințe</span>
+                    <span class="item-name" data-i18n="item-baguette">Baghetă franceză cu semințe</span>
                     <span class="item-price">15 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -798,10 +842,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Donuts cu umplutură</span>
+                    <span class="item-name" data-i18n="item-donut-filled">Donuts cu umplutură</span>
                     <span class="item-price">20 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -811,10 +855,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Donuts simplu</span>
+                    <span class="item-name" data-i18n="item-donut-simple">Donuts simplu</span>
                     <span class="item-price">15 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -824,10 +868,10 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Donuts OREO</span>
+                    <span class="item-name" data-i18n="item-donut-oreo">Donuts OREO</span>
                     <span class="item-price">23 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
@@ -837,30 +881,261 @@
             </div>
             <div class="item-info">
                 <div class="item-header">
-                    <span class="item-name">Donuts cu Fistic</span>
+                    <span class="item-name" data-i18n="item-donut-pistachio">Donuts cu Fistic</span>
                     <span class="item-price">23 MDL</span>
                 </div>
-                <button class="add-btn bakery-btn">Adaugă în coș</button>
+                <button class="add-btn bakery-btn" data-i18n="add-btn">Adaugă în coș</button>
             </div>
         </div>
 
-    </div> <!-- AICI se închide corect containerul grid după ultimul produs -->
+    </div>
 
-    <!-- ADAOSURI -->
-    <h2 class="category-title">Adaosuri</h2>
+    <h2 class="category-title" data-i18n="cat-toppings">Adaosuri</h2>
     <div class="toppings-box">
-        
-        <div class="topping-item"><span>Lapte / Sirop / Condensat</span> <span class="topping-price">5 MDL</span></div>
-        <div class="topping-item"><span>Lapte Vegan (Ovăz/Cocos)</span> <span class="topping-price">8 MDL</span></div>
-        <div class="topping-item"><span>Miere / Topping Extra</span> <span class="topping-price">5 MDL</span></div>
+        <div class="topping-item"><span data-i18n="top-milk">Lapte / Sirop / Condensat</span> <span class="topping-price">5 MDL</span></div>
+        <div class="topping-item"><span data-i18n="top-vegan">Lapte Vegan (Ovăz/Cocos)</span> <span class="topping-price">8 MDL</span></div>
+        <div class="topping-item"><span data-i18n="top-honey">Miere / Topping Extra</span> <span class="topping-price">5 MDL</span></div>
     </div>
 </div>
 
 <footer>
     <p style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 10px;">Nufar Bakery</p>
-    <p>&copy; 2026 NUFAR BAKERY. Totul pentru tine.</p>
-    <p style="font-size: 0.85rem; margin-top: 10px; opacity: 0.8;">Bulevardul Cuza Vodă 30 / Bulevardul Dacia 1. Chișinău, Moldova</p>
+    <p data-i18n="footer-copyright">&copy; 2026 NUFAR BAKERY. Totul pentru tine.</p>
+    <p style="font-size: 0.85rem; margin-top: 10px; opacity: 0.8;" data-i18n="footer-address">Bulevardul Cuza Vodă 30 / Bulevardul Dacia 1. Chișinău, Moldova</p>
 </footer>
+
+<script>
+// Dicționarul complet pentru localizarea site-ului (RO, RU, EN)
+const translations = {
+    ro: {
+        "page-title": "Nufar Bakery - Meniu Complet",
+        "brand-tagline": "Fine Coffee & Artisan Bread",
+        "cat-coffee": "☕ Cafea & Băuturi Calde",
+        "cat-summer": "☀️ Băuturi de VARĂ",
+        "cat-bakery": "🥐 Panificație & Patiserie",
+        "cat-toppings": "Adaosuri",
+        "add-btn": "Adaugă în coș",
+        // Produse: Cafea
+        "item-espresso": "Espresso / Double",
+        "item-americano": "Americano / Double",
+        "item-latte": "Latte / Vegan",
+        "item-cappuccino": "Cappuccino / Double / Vegan",
+        "item-mocaccino": "Mocaccino",
+        "item-mocha": "Mocha / Double",
+        "item-flat-white": "Flat White / Double",
+        "item-raf": "Raf / Double",
+        "item-cacao": "Cacao",
+        "item-decaf": "Decafeinată / Double",
+        "item-hot-chocolate": "Ciocolată Fierbinte",
+        "item-tea": "Ceai (Infuzie/Plic)",
+        // Produse: Băuturi de vară
+        "item-mojito": "Mojito",
+        "item-lim-classic": "Limonadă Clasică",
+        "item-lim-strawberry": "Limonadă Căpșuni",
+        "item-lim-mango": "Limonadă Mango",
+        "item-pina-colada": "Pina Colada",
+        "item-ice-latte": "Ice Latte / Vegan",
+        "item-iced-americano": "Iced Americano",
+        "item-esp-tonic": "Espresso Tonic",
+        "item-iced-chocolate": "Iced Chocolate",
+        // Produse: Patiserie
+        "item-sar-cheese": "Saralie cu brînză de vaci",
+        "item-sar-potato": "Saralie cu cartofi",
+        "item-sar-cabbage": "Saralie cu varză",
+        "item-sar-plum": "Saralie cu prune și nuci",
+        "item-inv-cheese": "Învîrtită cu brînză și verdeață",
+        "item-inv-mushrooms": "Învîrtită cu cartofi și ciuperci",
+        "item-inv-apple": "Învîrtită cu măr",
+        "item-inv-pumpkin": "Învîrtită cu dovleac",
+        "item-inv-cherry": "Învîrtită cu vișină",
+        "item-plac-cheese": "Plăcintă cu brînză (plic)",
+        "item-plac-chicken": "Plăcintă cu carne de găină",
+        "item-sausage-roll": "Crenvușcă în aluat",
+        "item-rollini-chicken": "Mini Rollini cu pui",
+        "item-rollini-cherry": "Mini Rollini cu vișină",
+        "item-puff-cheese": "Mini foietaj cu brînză de vaci dulce",
+        "item-puff-chicken": "Mini foietaj cu carne de găină",
+        "item-puff-berries": "Mini foietaj cu fructe de pădure",
+        "item-puff-poppy": "Mini foietaj cu mac",
+        "item-puff-cherry": "Mini foietaj cu vișină",
+        "item-croissant": "Croissant cu ciocolată",
+        "item-pretzel": "Covrig cu umplutură și migdale",
+        "item-ciabatta": "Pâine Ciabata",
+        "item-baguette": "Baghetă franceză cu semințe",
+        "item-donut-filled": "Donuts cu umplutură",
+        "item-donut-simple": "Donuts simplu",
+        "item-donut-oreo": "Donuts OREO",
+        "item-donut-pistachio": "Donuts cu Fistic",
+        // Adaosuri și Subsol (Footer)
+        "top-milk": "Lapte / Sirop / Condensat",
+        "top-vegan": "Lapte Vegan (Ovăz/Cocos)",
+        "top-honey": "Miere / Topping Extra",
+        "footer-copyright": "© 2026 NUFAR BAKERY. Totul pentru tine.",
+        "footer-address": "Bulevardul Cuza Vodă 30 / Bulevardul Dacia 1. Chișinău, Moldova"
+    },
+    ru: {
+        "page-title": "Nufar Bakery - Полное меню",
+        "brand-tagline": "Изысканный кофе и ремесленный хлеб",
+        "cat-coffee": "☕ Кофе и горячие напитки",
+        "cat-summer": "☀️ Летние напитки",
+        "cat-bakery": "🥐 Выпечка и кондитерские изделия",
+        "cat-toppings": "Добавки",
+        "add-btn": "В корзину",
+        // Produse: Cafea
+        "item-espresso": "Эспрессо / Двойной",
+        "item-americano": "Американо / Двойной",
+        "item-latte": "Латте / Веганский",
+        "item-cappuccino": "Капучино / Двойной / Веганский",
+        "item-mocaccino": "Мокаччино",
+        "item-mocha": "Мокка / Двойной",
+        "item-flat-white": "Флэт Уайт / Двойной",
+        "item-raf": "Раф / Двойной",
+        "item-cacao": "Какао",
+        "item-decaf": "Декофеиновый / Двойной",
+        "item-hot-chocolate": "Горячий шоколад",
+        "item-tea": "Чай (Листовой/В пакетиках)",
+        // Produse: Băuturi de vară
+        "item-mojito": "Мохито",
+        "item-lim-classic": "Классический лимонад",
+        "item-lim-strawberry": "Клубничный лимонад",
+        "item-lim-mango": "Манговый лимонад",
+        "item-pina-colada": "Пина Колада",
+        "item-ice-latte": "Айс Латте / Веганский",
+        "item-iced-americano": "Айс Американо",
+        "item-esp-tonic": "Эспрессо Тоник",
+        "item-iced-chocolate": "Холодный шоколад",
+        // Produse: Patiserie
+        "item-sar-cheese": "Саралия с творожной начинкой",
+        "item-sar-potato": "Саралия с картофелем",
+        "item-sar-cabbage": "Саралия с капустой",
+        "item-sar-plum": "Саралия с черносливом и орехами",
+        "item-inv-cheese": "Вертута с брынзой и зеленью",
+        "item-inv-mushrooms": "Вертута с картофелем и грибами",
+        "item-inv-apple": "Вертута с яблоком",
+        "item-inv-pumpkin": "Вертута с тыквой",
+        "item-inv-cherry": "Вертута с вишней",
+        "item-plac-cheese": "Плацинда с брынзой (конвертик)",
+        "item-plac-chicken": "Плацинда с куриным мясом",
+        "item-sausage-roll": "Сосиска в тесте",
+        "item-rollini-chicken": "Мини-роллини с курицей",
+        "item-rollini-cherry": "Mini-роллини с вишней",
+        "item-puff-cheese": "Мини-слойка со сладким творогом",
+        "item-puff-chicken": "Мини-слойка с куриным мясом",
+        "item-puff-berries": "Мини-слойка с лесными ягодами",
+        "item-puff-poppy": "Мини-слойка с маком",
+        "item-puff-cherry": "Мини-слойка с вишней",
+        "item-croissant": "Круассан с шоколадом",
+        "item-pretzel": "Бублик с начинкой и миндалем",
+        "item-ciabatta": "Хлеб Чиабатта",
+        "item-baguette": "Французский багет с семенами",
+        "item-donut-filled": "Пончик с начинкой",
+        "item-donut-simple": "Пончик классический",
+        "item-donut-oreo": "Пончик OREO",
+        "item-donut-pistachio": "Пончик с фисташкой",
+        // Adaosuri și Subsol (Footer)
+        "top-milk": "Молоко / Сироп / Сгущенка",
+        "top-vegan": "Веганское молоко (Овсяное/Кокосовое)",
+        "top-honey": "Мёд / Экстра топпинг",
+        "footer-copyright": "© 2026 NUFAR BAKERY. Всё для вас.",
+        "footer-address": "Бульвар Куза-Водэ 30 / Бульвар Дачия 1. Кишинёв, Молдова"
+    },
+    en: {
+        "page-title": "Nufar Bakery - Complete Menu",
+        "brand-tagline": "Fine Coffee & Artisan Bread",
+        "cat-coffee": "☕ Coffee & Hot Drinks",
+        "cat-summer": "☀️ Summer Drinks",
+        "cat-bakery": "🥐 Bakery & Pastry",
+        "cat-toppings": "Toppings",
+        "add-btn": "Add to cart",
+        // Produse: Cafea
+        "item-espresso": "Espresso / Double",
+        "item-americano": "Americano / Double",
+        "item-latte": "Latte / Vegan",
+        "item-cappuccino": "Cappuccino / Double / Vegan",
+        "item-mocaccino": "Mocaccino",
+        "item-mocha": "Mocha / Double",
+        "item-flat-white": "Flat White / Double",
+        "item-raf": "Raf / Double",
+        "item-cacao": "Cocoa",
+        "item-decaf": "Decaf / Double",
+        "item-hot-chocolate": "Hot Chocolate",
+        "item-tea": "Tea (Infusion/Bag)",
+        // Produse: Băuturi de vară
+        "item-mojito": "Mojito",
+        "item-lim-classic": "Classic Lemonade",
+        "item-lim-strawberry": "Strawberry Lemonade",
+        "item-lim-mango": "Mango Lemonade",
+        "item-pina-colada": "Pina Colada",
+        "item-ice-latte": "Ice Latte / Vegan",
+        "item-iced-americano": "Iced Americano",
+        "item-esp-tonic": "Espresso Tonic",
+        "item-iced-chocolate": "Iced Chocolate",
+        // Produse: Patiserie
+        "item-sar-cheese": "Saralie with cottage cheese",
+        "item-sar-potato": "Saralie with potatoes",
+        "item-sar-cabbage": "Saralie with cabbage",
+        "item-sar-plum": "Saralie with prunes and walnuts",
+        "item-inv-cheese": "Vertuta with cheese and greens",
+        "item-inv-mushrooms": "Vertuta with potatoes and mushrooms",
+        "item-inv-apple": "Vertuta with apple",
+        "item-inv-pumpkin": "Vertuta with pumpkin",
+        "item-inv-cherry": "Vertuta with cherry",
+        "item-plac-cheese": "Placinta with cheese (envelope)",
+        "item-plac-chicken": "Placinta with chicken meat",
+        "item-sausage-roll": "Sausage Roll",
+        "item-rollini-chicken": "Mini Chicken Rollini",
+        "item-rollini-cherry": "Mini Cherry Rollini",
+        "item-puff-cheese": "Mini sweet cottage cheese puff",
+        "item-puff-chicken": "Mini chicken pastry puff",
+        "item-puff-berries": "Mini forest berries puff",
+        "item-puff-poppy": "Mini poppy seed puff",
+        "item-puff-cherry": "Mini cherry pastry puff",
+        "item-croissant": "Chocolate Croissant",
+        "item-pretzel": "Pretzel with filling and almonds",
+        "item-ciabatta": "Ciabatta Bread",
+        "item-baguette": "French Baguette with seeds",
+        "item-donut-filled": "Filled Donut",
+        "item-donut-simple": "Plain Donut",
+        "item-donut-oreo": "OREO Donut",
+        "item-donut-pistachio": "Pistachio Donut",
+        // Adaosuri și Subsol (Footer)
+        "top-milk": "Milk / Syrup / Condensed milk",
+        "top-vegan": "Vegan Milk (Oat/Coconut)",
+        "top-honey": "Honey / Extra Topping",
+        "footer-copyright": "© 2026 NUFAR BAKERY. All for you.",
+        "footer-address": "30 Cuza Voda Boulevard / 1 Dacia Boulevard. Chisinau, Moldova"
+    }
+};
+
+function changeLanguage(lang) {
+    // 1. Setează atributul lang al elementului HTML principal
+    document.documentElement.lang = lang;
+    
+    // 2. Caută toate elementele care au atributul 'data-i18n' și le înlocuiește textul conform limbii selectate
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            element.textContent = translations[lang][key];
+        }
+    });
+
+    // 3. Modifică titlul paginii afișat în tab-ul browserului
+    document.title = translations[lang]["page-title"];
+    
+    // 4. Schimbă clasa butonului activ (pentru ca utilizatorul să vadă ce limbă este selectată)
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(`btn-${lang}`).classList.add('active');
+    
+    // 5. Salvează limba aleasă în memoria browserului (LocalStorage) pentru ca site-ul să nu revină la română dacă utilizatorul dă refresh
+    localStorage.setItem('selectedNufarLang', lang);
+}
+
+// Când pagina s-a încărcat complet, verifică dacă există o limbă salvată anterior, altfel aplică implicit româna ('ro')
+window.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('selectedNufarLang') || 'ro';
+    changeLanguage(savedLang);
+});
+</script>
 
 </body>
 </html>
